@@ -19,7 +19,6 @@ const schema = a.schema({
       id: a.id(),
       name: a.string(),
       pricing: a.ref("Pricing"),
-      teams: a.hasMany("Team", "tenantId"),
       users: a.hasMany("User", "tenantId"),
     })
     .authorization((allow) => [allow.groupDefinedIn("id"), allow.custom()]),
