@@ -21,7 +21,7 @@ const schema = a.schema({
       pricing: a.ref("Pricing"),
       users: a.hasMany("User", "tenantId"),
     })
-    .authorization((allow) => [allow.groupDefinedIn("id"), allow.custom()]),
+    .authorization((allow) => [allow.groupDefinedIn("id")]),
   User: a
     .model({
       id: a.id(),
