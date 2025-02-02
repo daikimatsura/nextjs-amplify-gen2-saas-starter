@@ -13,6 +13,8 @@
     "@aws-amplify/core": "^6.9.2",
     "@aws-amplify/ui-react": "^6.9.1",
     "@aws-sdk/client-cognito-identity-provider": "^3.738.0",
+    "@aws-sdk/client-s3": "^3.624.0",
+    "@aws-sdk/types": "^3.609.0",
     "@aws-sdk/client-cloudformation": "^3.624.0",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-label": "^2.1.1",
