@@ -40,4 +40,4 @@ next-env.d.ts
 amplify_outputs*
 amplifyconfiguration*
 
-package-lock.json
+yarn.lock
