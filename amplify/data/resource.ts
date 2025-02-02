@@ -45,8 +45,8 @@ const schema = a.schema({
       password: a.string(),
     })
     .returns(a.ref("onboardingResponse"))
-    .handler(a.handler.function(onboardingHandler))
-    .authorization((allow) => [allow.guest()]),
+    .authorization((allow) => [allow.guest()])
+    .handler(a.handler.function(onboardingHandler)),
 });
 
 export type Schema = ClientSchema<typeof schema>;
