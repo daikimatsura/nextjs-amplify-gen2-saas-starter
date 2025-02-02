@@ -320,6 +320,20 @@
     tslib "^2.5.0"
     uuid "^9.0.0"
 
+"@aws-amplify/core@^6.9.2":
+  version "6.9.2"
+  resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-6.9.2.tgz#04948ba50baaa8f94a5d0817e8c3debc50386089"
+  integrity sha512-a4WAOmg5LUw4iHm+mjOmKB6grjPKL2zXS9+haMNooc4JgkZ80azF6jWyzLdaKRZl02j+pPKn75WKM877L/r7sQ==
+  dependencies:
+    "@aws-crypto/sha256-js" "5.2.0"
+    "@aws-sdk/types" "3.398.0"
+    "@smithy/util-hex-encoding" "2.0.0"
+    "@types/uuid" "^9.0.0"
+    js-cookie "^3.0.5"
+    rxjs "^7.8.1"
+    tslib "^2.5.0"
+    uuid "^9.0.0"
+
 "@aws-amplify/data-construct@^1.14.5":
   version "1.14.6"
   resolved "https://registry.npmjs.org/@aws-amplify/data-construct/-/data-construct-1.14.6.tgz"
