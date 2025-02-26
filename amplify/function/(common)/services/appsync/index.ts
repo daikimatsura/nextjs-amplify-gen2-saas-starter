@@ -25,7 +25,6 @@ type QueryResult<T extends ModelsKeys, U extends QueryResolvers<T>> = Awaited<
 type QueryResultData<
   T extends ModelsKeys,
   U extends QueryResolvers<T>,
-  // @ts-ignore
 > = QueryResult<T, U>["data"];
 
 const baseQuery = async <T extends ModelsKeys, U extends QueryResolvers<T>>(
@@ -40,12 +39,10 @@ const baseQuery = async <T extends ModelsKeys, U extends QueryResolvers<T>>(
   return await resolverFn(params);
 };
 
-// @ts-ignore
 const baseList = async <T extends ModelsKeys, U extends QueryResolvers<T>>(
   models: T,
   resolver: U,
   params: QueryParams<T, U>
-  // @ts-ignore
 ): Promise<QueryResultData<T, U>> => {
   const result: {
     data: QueryResultData<T, U>;
@@ -54,15 +51,24 @@ const baseList = async <T extends ModelsKeys, U extends QueryResolvers<T>>(
     data: [],
     nextToken: undefined,
   };
-  do {
-    const res = await baseQuery(models, resolver, {
-      ...params,
-      nextToken: result.nextToken,
-    });
-    result.data.push(...(res?.data ?? []));
-    result.nextToken = res?.nextToken;
-  } while (result.nextToken);
-  return result.data;
+
+  try {
+    do {
+      const res = await baseQuery(models, resolver, {
+        ...params,
+        nextToken: result.nextToken,
+      });
+      result.data.push(...(res?.data ?? []));
+      result.nextToken = res?.nextToken;
+    } while (result.nextToken);
+    return result.data;
+  } catch (error) {
+    console.error(
+      `Error in baseList for ${String(models)}.${String(resolver)}:`,
+      error
+    );
+    throw error;
+  }
 };
 
 /*
