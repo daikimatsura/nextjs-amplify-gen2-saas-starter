@@ -25,20 +25,15 @@ const baseQuery = async <T extends QueryKeys>(
   try {
     const queryFn = cookiesClient.queries[query];
 
-    // パラメータを準備
     let queryParams = params || {};
 
-    // オプションを適用
-    if (options?.authMode) {
-      // 新しいオブジェクトを作成して変更を適用
+    if (!!options) {
       queryParams = {
         ...queryParams,
-        authMode: options.authMode,
+        ...options,
       };
     }
 
-    // クエリを実行
-    // 戻り値の型を明示的に指定
     return queryFn(queryParams) as Promise<QueryResult<T>>;
   } catch (error) {
     console.error(`AppSync query error (${query}):`, error);

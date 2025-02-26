@@ -45,7 +45,7 @@
     signedsource "^1.0.0"
     yargs "^15.3.1"
 
-"@aws-amplify/adapter-nextjs@^1.5.1":
+"@aws-amplify/adapter-nextjs@^1.4.2":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@aws-amplify/adapter-nextjs/-/adapter-nextjs-1.5.1.tgz#5849dc266af292fa3b45bb16c4b180eafa6657c2"
   integrity sha512-oVgakVkGTvHlcSrnT9hRq4B4lqmIQd0d7ZHmGO2pCOO/hciHLTgYy3zeECKubdMTDoNzLX2pgW0RqswN+3eU3Q==
@@ -312,7 +312,7 @@
     change-case "^4.1.2"
     yup "^0.32.11"
 
-"@aws-amplify/core@6.10.1", "@aws-amplify/core@^6.10.1":
+"@aws-amplify/core@6.10.1", "@aws-amplify/core@^6.9.2":
   version "6.10.1"
   resolved "https://registry.yarnpkg.com/@aws-amplify/core/-/core-6.10.1.tgz#4c54da40eaa6999355451bc61f2dc243ce767078"
   integrity sha512-MZPcPdiK9Yqm1PYO1AjeYsz1u4T0GYLZcgGVcQhi9M8n5I6BYHbe8mG0OAqYPzCIqGKQ44m9+Zf6l+YZat2zuA==
@@ -1044,7 +1044,7 @@
     react-hook-form "^7.53.2"
     xstate "^4.33.6"
 
-"@aws-amplify/ui-react@^6.5.5":
+"@aws-amplify/ui-react@^6.9.1":
   version "6.9.2"
   resolved "https://registry.yarnpkg.com/@aws-amplify/ui-react/-/ui-react-6.9.2.tgz#bfcdad03192c3c4730a9f73a85c05ca145b0ba4c"
   integrity sha512-Ud+F+uj8NqybebLMlAbpOrB7xt+URdxjWTWuaZoxLqMW894dYhVvIoCkohxPRT7CMMTBlyN/qeB0EOk02oiA2w==
@@ -1441,7 +1441,7 @@
     tslib "^2.6.2"
     uuid "^9.0.1"
 
-"@aws-sdk/client-cognito-identity-provider@^3.750.0":
+"@aws-sdk/client-cognito-identity-provider@^3.738.0":
   version "3.750.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-cognito-identity-provider/-/client-cognito-identity-provider-3.750.0.tgz#3157b1ca3d65c1272c9d2ad6eb0da0a825819025"
   integrity sha512-HmBi33j/rGEHCL92Y6LM8IvrFi3WzxKiy7LbljuFSofhuJPj9+tz8PG/qI/Dc7u7pw630HEaAJ5cJBlXNKKYaQ==
@@ -6213,7 +6213,7 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
-aws-amplify@^6.13.1:
+aws-amplify@^6.12.2:
   version "6.13.1"
   resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-6.13.1.tgz#e9f46a2b0b6c5ab21768d6ffb8e95ff96018a6b0"
   integrity sha512-qlEi4SVN4RCRkT9rp+x/ReIvTrmbdj/xuadieMFxCYpwKHb3P3qfag6AR2djgpG6d+HytxwNFiJaB0ZxB9u9uQ==

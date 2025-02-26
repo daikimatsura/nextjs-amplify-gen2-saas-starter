@@ -47,17 +47,11 @@ export default function Onboarding() {
       if (response.success) {
         toast.success(response.message, {
           description: "コード認証画面にリダイレクト",
-          action: {
-            label: "コード認証画面に移動",
-            onClick: () => {
-              router.push(`/verify?username=${response.username}`);
-            },
-          },
         });
         // コード認証画面にリダイレクト
         router.push(`/verify?username=${response.username}`);
       } else {
-        toast.error(response.message);
+        toast.error(response.message || "サインアップに失敗しました。");
         // エラーメッセージの表示
         console.error("サインアップエラー:", response.message);
       }

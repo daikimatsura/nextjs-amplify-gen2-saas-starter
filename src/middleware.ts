@@ -7,6 +7,7 @@ import { runWithAmplifyServerContext } from "@/lib/amplify";
 
 export async function middleware(request: NextRequest) {
   const response = NextResponse.next();
+  console.log(request);
 
   const authenticated = await runWithAmplifyServerContext({
     nextServerContext: { request, response },
@@ -21,7 +22,17 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  if (authenticated) {
+  if (
+    request.nextUrl.pathname === "/onboarding" ||
+    request.nextUrl.pathname === "/sign-in" ||
+    request.nextUrl.pathname === "/verify"
+  ) {
+    if (authenticated) {
+      return NextResponse.redirect(new URL("/home", request.url));
+    } else {
+      return response;
+    }
+  } else if (authenticated) {
     return response;
   }
 
@@ -36,10 +47,7 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - onboarding
-     * - verify
-     * - sign-in
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|onboarding|verify|sign-in|$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|$).*)",
   ],
 };
