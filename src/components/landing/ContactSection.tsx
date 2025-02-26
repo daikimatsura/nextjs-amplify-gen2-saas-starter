@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { CustomFormField } from "@/components/ui/CustomFormField";
+import { CustomFormField } from "@/components/ui/form/CustomFormField";
 import { useState } from "react";
 import { contactSchema, type ContactFormValues } from "@/schema/zod/schema";
 

@@ -1,0 +1,126 @@
+{
+  "ignore_patterns": [
+    ".git/",
+    ".next/",
+    "node_modules/",
+    ".amplify/",
+    "*.lock",
+    "*.log",
+    ".DS_Store",
+    "amplify_outputs.json",
+    ".env",
+    ".env.local"
+  ],
+  "important_files": [
+    "src/app/layout.tsx",
+    "src/lib/amplify.ts",
+    "amplify/backend.ts",
+    "src/middleware.ts",
+    "package.json",
+    "tsconfig.json",
+    "tailwind.config.ts",
+    "src/lib/utils.ts",
+    "amplify/auth/resource.ts",
+    "amplify/data/resource.ts"
+  ],
+  "project_structure": {
+    "app": "src/app",
+    "components": "src/components",
+    "lib": "src/lib",
+    "amplify": "amplify",
+    "types": "src/types",
+    "services": "src/services",
+    "schema": "src/schema",
+    "api_routes": "src/app/api",
+    "styles": "src/styles",
+    "constants": "src/constants",
+    "public": "public"
+  },
+  "coding_conventions": {
+    "framework": "Next.js",
+    "styling": "Tailwind CSS",
+    "backend": "AWS Amplify Gen2",
+    "language": "TypeScript",
+    "component_style": "React Functional Components",
+    "state_management": "React Hooks",
+    "form_handling": "react-hook-form with zod",
+    "ui_library": "shadcn/ui components",
+    "auth": "AWS Cognito via Amplify",
+    "data_fetching": "Server Components and API Routes",
+    "routing": "App Router (Next.js 13+)",
+    "app_structure": {
+      "landing_page": "src/app/(landing-page)",
+      "saas_app": "src/app/(saas-app)"
+    },
+    "api_structure": {
+      "auth": "src/app/api/auth",
+      "contact": "src/app/api/contact"
+    }
+  },
+  "developer_profile": {
+    "expertise": [
+      "Next.js App Router architecture",
+      "Type-safe development with TypeScript",
+      "AWS Amplify Gen2 serverless backend",
+      "Cognito authentication system",
+      "Modern UI development with Tailwind and shadcn/UI",
+      "Type-safe form handling with react-hook-form and zod"
+    ],
+    "preferred_tools": [
+      "VSCode",
+      "TypeScript",
+      "ESLint",
+      "Prettier",
+      "AWS CLI"
+    ]
+  },
+  "coding_style": {
+    "architecture": {
+      "monorepo": "Frontend and backend managed in the same repository",
+      "feature_based": "Code structure clearly separated by features",
+      "route_groups": "Separation of pages with different layouts"
+    },
+    "component_design": {
+      "functional": "All implemented as React functional components",
+      "categorization": {
+        "ui": "Reusable basic UI components",
+        "amplify": "Amplify-related components",
+        "landing": "Landing page specific components"
+      }
+    },
+    "state_management": {
+      "hooks": "State management using React Hooks",
+      "server_components": "Utilizing server components for data fetching",
+      "api_routes": "API routes for client request processing"
+    },
+    "styling": {
+      "tailwind": "Utility-first approach",
+      "shadcn_ui": "Reusable UI component library",
+      "cn_utility": "Utility function combining clsx and tailwind-merge"
+    }
+  },
+  "best_practices": {
+    "type_safety": "Ensuring type safety through strict type checking without using any or type assertions",
+    "modularization": "Appropriate modularization by feature",
+    "environment_config": "Environment configuration using .env files",
+    "component_reusability": "Reusable component design",
+    "server_client_separation": "Clear separation of server and client code",
+    "type_assertions": "Avoid using 'as any' or type assertions, prefer proper type definitions",
+    "error_handling": "Comprehensive error handling with proper typing",
+    "amplify_integration": "Follow AWS Amplify Gen2 best practices for type-safe integration"
+  },
+  "file_naming": {
+    "components": "PascalCase.tsx",
+    "utilities": "camelCase.ts",
+    "special_files": "page.tsx, layout.tsx, etc. following Next.js conventions",
+    "api_routes": "API endpoints defined in route.ts files"
+  },
+  "typescript_rules": {
+    "no_any": "Never use 'any' type, always define proper interfaces and types",
+    "no_type_assertion": "Avoid type assertions (as) when possible, use proper type guards instead",
+    "strict_null_checks": "Always handle null and undefined values properly",
+    "exhaustive_deps": "Always include all dependencies in useEffect and similar hooks",
+    "proper_typing": "Always provide proper typing for functions, variables and components",
+    "amplify_typing": "Use proper typing for AWS Amplify Gen2 APIs and services"
+  }
+}

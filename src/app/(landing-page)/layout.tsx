@@ -58,12 +58,12 @@ export default function LandingPageLayout({
                 </Link>
               ))}
             </nav>
-            <Link href="/login">
+            <Link href="/sign-in">
               <Button className="bg-cyan-500 hover:bg-cyan-400 text-white rounded-full">
                 Login
               </Button>
             </Link>
-            <Link href="/signup?plan=FREE">
+            <Link href="/onboarding?plan=FREE">
               <Button className="bg-cyan-700 hover:bg-cyan-600 text-white rounded-full">
                 Get Started Free
               </Button>
@@ -72,6 +72,15 @@ export default function LandingPageLayout({
         </div>
       </header>
       <div className="pt-16">{children}</div>
+      <footer className="py-8 border-t border-cyan-200 ">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-cyan-200 text-sm">
+              &copy; {new Date().getFullYear()} daiki matsuura.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

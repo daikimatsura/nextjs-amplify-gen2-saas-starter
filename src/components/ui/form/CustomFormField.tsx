@@ -8,6 +8,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
 
 // フォームフィールドの共通型を汎用化
 type CustomFormFieldProps<T extends FieldValues> = {
@@ -27,6 +28,8 @@ export function CustomFormField<T extends FieldValues>({
   type = "text",
 }: CustomFormFieldProps<T>) {
   const isTextarea = type === "textarea";
+  const isCheckbox = type === "checkbox";
+  const isLabel = type === "label";
 
   return (
     <FormField
@@ -34,7 +37,7 @@ export function CustomFormField<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{label}</FormLabel>
+          {!isCheckbox && <FormLabel>{label}</FormLabel>}
           <FormControl>
             {isTextarea ? (
               <Textarea
@@ -43,6 +46,17 @@ export function CustomFormField<T extends FieldValues>({
                 rows={6}
                 {...field}
               />
+            ) : isCheckbox ? (
+              <div className="flex items-center gap-2">
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  {...field}
+                />
+                <FormLabel className="text-sm">{label}</FormLabel>
+              </div>
+            ) : isLabel ? (
+              <p className="text-sm">{field.value}</p>
             ) : (
               <Input type={type} placeholder={placeholder} {...field} />
             )}

@@ -9,10 +9,13 @@ import "@aws-amplify/ui-react/styles.css";
 function Login({ user }: { user?: AuthUser }) {
   useEffect(() => {
     if (user) {
-      redirect("/");
+      redirect("/home");
     }
   }, [user]);
   return null;
 }
 
-export default withAuthenticator(Login);
+export default withAuthenticator(Login, {
+  hideSignUp: true,
+  // socialProviders: ["google"],
+});

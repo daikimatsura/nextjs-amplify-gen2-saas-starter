@@ -3,17 +3,23 @@
 import { useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { CustomFormField } from "@/components/ui/CustomFormField";
+import { CustomFormField } from "@/components/ui/form/CustomFormField";
 import { signupSchema, type SignupFormValues } from "@/schema/zod/schema";
 import { isPlan, PricingEnum } from "@/schema/appSync/schema";
-
+import { useRouter } from "next/navigation";
 import PlanNotFound from "./plan-not-found";
+import { handleOnboarding } from "@/lib/actions";
+import { toast } from "sonner";
+import { useState } from "react";
+import { LoadingButton } from "@/components/ui/buttons/LoadingButton";
 
-export default function Signup() {
+export default function Onboarding() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan");
+  const [isLoading, setIsLoading] = useState(false);
+
   if (!plan || !isPlan(plan)) {
     return <PlanNotFound plan={plan} />;
   }
@@ -23,38 +29,43 @@ export default function Signup() {
     defaultValues: {
       plan: plan,
       tenantName: "",
-      userName: "",
+      // userName: "",
       email: "",
       password: "",
       confirmPassword: "",
+      acceptTerms: false,
     },
   });
 
   const onSubmit = async (values: SignupFormValues) => {
     try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      setIsLoading(true);
+      const response = await handleOnboarding(values);
 
-      const data = await response.json();
-      console.log(data);
+      console.log(response);
 
-      if (!response.ok) {
-        throw new Error(data.error || "サインアップに失敗しました");
-      }
-
-      if (data.statusCode === 200) {
-        // TODO: サインアップ成功後の処理（例：ログインページへのリダイレクト）
-        console.log("サインアップ成功:", data);
+      if (response.success) {
+        toast.success(response.message, {
+          description: "コード認証画面にリダイレクト",
+          action: {
+            label: "コード認証画面に移動",
+            onClick: () => {
+              router.push(`/verify?username=${response.username}`);
+            },
+          },
+        });
+        // コード認証画面にリダイレクト
+        router.push(`/verify?username=${response.username}`);
       } else {
+        toast.error(response.message);
+        // エラーメッセージの表示
+        console.error("サインアップエラー:", response.message);
       }
     } catch (error) {
+      toast.error(`サインアップに失敗しました。管理者にお問い合わせください。`);
       console.error("サインアップエラー:", error);
-      // TODO: エラーメッセージの表示
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -70,7 +81,6 @@ export default function Signup() {
           </p>
         )}
       </div>
-
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <Form {...form}>
@@ -78,13 +88,13 @@ export default function Signup() {
               <CustomFormField
                 control={form.control}
                 name="tenantName"
-                label="組織名"
+                label="会社名"
               />
-              <CustomFormField
+              {/* <CustomFormField
                 control={form.control}
                 name="userName"
                 label="氏名"
-              />
+              /> */}
               <CustomFormField
                 control={form.control}
                 name="email"
@@ -103,9 +113,19 @@ export default function Signup() {
                 label="パスワード（確認）"
                 type="password"
               />
-              <Button type="submit" className="w-full">
+              <CustomFormField
+                control={form.control}
+                name="acceptTerms"
+                label="利用規約・プライバシーポリシーに同意する"
+                type="checkbox"
+              />
+              <LoadingButton
+                isLoading={isLoading}
+                type="submit"
+                className="w-full"
+              >
                 アカウントを作成
-              </Button>
+              </LoadingButton>
             </form>
           </Form>
         </div>

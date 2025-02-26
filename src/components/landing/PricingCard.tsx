@@ -18,7 +18,7 @@ export const PricingCard: React.FC<Plans[number]> = ({
 }) => {
   const router = useRouter();
   const onClick = () => {
-    router.push(`/signup?plan=${plan}`);
+    router.push(`/onboarding?plan=${plan}`);
   };
   return (
     <div

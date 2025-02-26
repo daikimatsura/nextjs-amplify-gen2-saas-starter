@@ -1,4 +1,5 @@
 import { defineFunction } from "@aws-amplify/backend";
+import amplifyOutputs from "../../amplify_outputs.json";
 
 export const postConfirmation = defineFunction({
   entry: "./postConfirmation/handler.ts",
@@ -12,4 +13,7 @@ export const onboardingHandler = defineFunction({
   name: "onboardingHandler",
   runtime: 22,
   timeoutSeconds: 300,
+  environment: {
+    AMPLIFY_AUTH_USERPOOL_CLIENT_ID: amplifyOutputs.auth.user_pool_client_id,
+  },
 });

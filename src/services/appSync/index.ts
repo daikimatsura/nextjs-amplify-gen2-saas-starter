@@ -9,6 +9,14 @@ type QueryResult<T extends QueryKeys> = Awaited<
   ReturnType<(typeof cookiesClient)["queries"][T]>
 >;
 
+/**
+ * Amplify Gen2のクエリを実行する汎用関数
+ *
+ * @param query 実行するクエリの名前
+ * @param params クエリのパラメータ
+ * @param options 認証モードなどのオプション
+ * @returns クエリの結果
+ */
 const baseQuery = async <T extends QueryKeys>(
   query: T,
   params?: QueryParams<T>,
@@ -16,11 +24,22 @@ const baseQuery = async <T extends QueryKeys>(
 ): Promise<QueryResult<T>> => {
   try {
     const queryFn = cookiesClient.queries[query];
-    const result = await queryFn({
-      ...params,
-      ...options,
-    } as any);
-    return result as QueryResult<T>;
+
+    // パラメータを準備
+    let queryParams = params || {};
+
+    // オプションを適用
+    if (options?.authMode) {
+      // 新しいオブジェクトを作成して変更を適用
+      queryParams = {
+        ...queryParams,
+        authMode: options.authMode,
+      };
+    }
+
+    // クエリを実行
+    // 戻り値の型を明示的に指定
+    return queryFn(queryParams) as Promise<QueryResult<T>>;
   } catch (error) {
     console.error(`AppSync query error (${query}):`, error);
     console.info(`params: ${JSON.stringify(params)}`);
@@ -34,5 +53,5 @@ export const onboardingHandler = async (
   params: QueryParams<"onboardingHandler">
 ) =>
   await baseQuery<"onboardingHandler">("onboardingHandler", params, {
-    authMode: "identityPool",
+    authMode: "iam",
   });

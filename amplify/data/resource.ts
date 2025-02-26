@@ -4,33 +4,38 @@ import { onboardingHandler } from "../function/resource";
 const schema = a
   .schema({
     Pricing: a.enum(["FREE", "STARTER", "PRO"]),
+    TenantStatus: a.enum(["PENDING", "ACTIVE", "INACTIVE"]),
+    UserRole: a.enum(["ROOT", "ADMIN", "SYSTEM_MANAGER", "MEMBER"]),
     Tenant: a
       .model({
         id: a.id(),
         name: a.string(),
         pricing: a.ref("Pricing"),
+        status: a.ref("TenantStatus"),
         users: a.hasMany("User", "tenantId"),
       })
-      .authorization((allow) => [allow.groupDefinedIn("id")]),
+      .authorization((allow) => [allow.groupDefinedIn("name")]),
     User: a
       .model({
         id: a.id(),
         name: a.string(),
         email: a.string(),
         tenantId: a.id().required(),
+        role: a.ref("UserRole"),
         tenant: a.belongsTo("Tenant", "tenantId"),
+        group: a.string(),
       })
-      .authorization((allow) => [allow.groupDefinedIn("tenantId")]),
+      .authorization((allow) => [allow.groupDefinedIn("group")]),
     onboardingResponse: a.customType({
       statusCode: a.integer(),
       message: a.string(),
+      username: a.string(),
     }),
     onboardingHandler: a
       .query()
       .arguments({
         plan: a.string(),
         tenantName: a.string(),
-        userName: a.string(),
         email: a.string(),
         password: a.string(),
       })

@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import ConfigureAmplifyClientSide from "@/components/amplify/ConfigureAmplifyClientSide";
 import "@/styles/globals.css";
-
+import { Toaster } from "@/components/ui/sonner";
+import Loading from "./loading";
 export const metadata: Metadata = {
   title: "SaaS Demo",
   description: "SaaS Demo Landing Page",
@@ -20,15 +21,8 @@ export default function RootLayout({
       <body className="bg-cyan-800">
         <ConfigureAmplifyClientSide />
         <main className="min-h-screen">{children}</main>
-        <footer className="py-8 border-t border-cyan-200 ">
-          <div className="container mx-auto px-6">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <p className="text-cyan-200 text-sm">
-                &copy; {new Date().getFullYear()} daiki matsuura.
-              </p>
-            </div>
-          </div>
-        </footer>
+        <Toaster />
+        <Loading />
       </body>
     </html>
   );

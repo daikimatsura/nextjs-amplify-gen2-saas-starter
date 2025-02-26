@@ -20,10 +20,11 @@ const resolvers: {
   Query: {
     onboardingHandler: (
       event: any
-    ) => Promise<{ statusCode: number; body: string }>;
+    ) => Promise<{ statusCode: number; message: string; username: string }>;
   };
 } = {
   Query: {
-    onboardingHandler: async (event: any) => await onboardingHandler(event),
+    onboardingHandler: async (event: any) =>
+      await onboardingHandler(event.arguments),
   },
 };

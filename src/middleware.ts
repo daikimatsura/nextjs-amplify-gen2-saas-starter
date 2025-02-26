@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  return NextResponse.redirect(new URL("/not-found", request.url));
+  return NextResponse.redirect(new URL("/sign-in", request.url));
 }
 
 export const config = {
@@ -36,10 +36,10 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
-     * - login
-     * - / (root path)
-     * - signup
+     * - onboarding
+     * - verify
+     * - sign-in
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|login|signup|not-found|$).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|onboarding|verify|sign-in|$).*)",
   ],
 };
