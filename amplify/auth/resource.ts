@@ -52,4 +52,5 @@ export const auth = defineAuth({
       .resource(onboardingHandler)
       .to(["manageGroups", "manageUsers", "addUserToGroup"]),
   ],
+  groups: ["SaaSAdmin"],
 });

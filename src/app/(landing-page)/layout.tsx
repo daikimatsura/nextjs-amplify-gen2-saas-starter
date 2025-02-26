@@ -29,7 +29,7 @@ const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-cyan-800">
       <header
         className={`fixed top-0 left-0 right-0 py-4 ${
           isScrolled ? "bg-white text-gray-800 shadow-sm" : " text-white"
@@ -68,15 +68,6 @@ const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
       </header>
       <div className="pt-16">{children}</div>
-      <footer className="py-8 border-t border-cyan-200 ">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-cyan-200 text-sm">
-              &copy; {new Date().getFullYear()} daiki matsuura.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use server";
 
 import { signupSchema, verifyCodeSchema } from "@/schema/zod/schema";
-import { onboardingHandler } from "@/services/appSync";
+import { onboardingHandler, updateTenant } from "@/services/appSync";
 import { confirmSignUp } from "aws-amplify/auth";
 import { runWithAmplifyServerContext } from "@/lib/amplify";
 import { cookies } from "next/headers";

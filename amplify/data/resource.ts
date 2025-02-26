@@ -14,7 +14,10 @@ const schema = a
         status: a.ref("TenantStatus"),
         users: a.hasMany("User", "tenantId"),
       })
-      .authorization((allow) => [allow.groupDefinedIn("name")]),
+      .authorization((allow) => [
+        allow.groupDefinedIn("name"),
+        allow.groups(["SaaSAdmin"]),
+      ]),
     User: a
       .model({
         id: a.id(),
@@ -25,7 +28,10 @@ const schema = a
         tenant: a.belongsTo("Tenant", "tenantId"),
         group: a.string(),
       })
-      .authorization((allow) => [allow.groupDefinedIn("group")]),
+      .authorization((allow) => [
+        allow.groupDefinedIn("group"),
+        allow.groups(["SaaSAdmin"]),
+      ]),
     onboardingResponse: a.customType({
       statusCode: a.integer(),
       message: a.string(),

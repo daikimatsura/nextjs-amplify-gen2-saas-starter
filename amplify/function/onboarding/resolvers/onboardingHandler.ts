@@ -32,6 +32,10 @@ export const onboardingHandler = async (args: any) => {
       8. ユーザーをCognitoグループに追加(Cognito)
     */
     const { plan, tenantName, email, password } = args;
+    if (tenantName === "SaaSAdmin") {
+      // SaaSAdminはSaaS提供事業者用のグループのため、テナント名として使用できない
+      throw new Error("アカウントの作成に失敗しました");
+    }
 
     const tenant = await listTenants({
       filter: {

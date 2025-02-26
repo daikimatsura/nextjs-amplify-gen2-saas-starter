@@ -1,9 +1,5 @@
-import Logout from "@/components/amplify/Logout";
-
 const HomePage = () => (
-  <div>
-    <Logout />
-  </div>
+  <div className="text-gray-900 dark:text-gray-100">ホームページ</div>
 );
 
 HomePage.displayName = "HomePage";

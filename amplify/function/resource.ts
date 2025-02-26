@@ -1,4 +1,5 @@
 import { defineFunction } from "@aws-amplify/backend";
+import "dotenv/config";
 
 export const postConfirmation = defineFunction({
   entry: "./postConfirmation/handler.ts",
