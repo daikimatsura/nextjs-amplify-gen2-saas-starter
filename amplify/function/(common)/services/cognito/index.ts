@@ -4,6 +4,8 @@ import {
   CreateGroupCommand,
   AdminAddUserToGroupCommand,
   SignUpCommand,
+  AdminDeleteUserCommand,
+  DeleteGroupCommand,
 } from "@aws-sdk/client-cognito-identity-provider";
 
 const client = new CognitoIdentityProviderClient({});
@@ -27,6 +29,14 @@ export const signUpCognitoUser = async (
   return await client.send(command);
 };
 
+export const deleteCognitoUser = async (email: string) => {
+  const command = new AdminDeleteUserCommand({
+    Username: email,
+    UserPoolId: env.AMPLIFY_AUTH_USERPOOL_ID,
+  });
+  return await client.send(command);
+};
+
 export const addCognitoGroup = async (tenantName: string) => {
   const command = new CreateGroupCommand({
     GroupName: tenantName,
@@ -38,6 +48,14 @@ export const addCognitoGroup = async (tenantName: string) => {
 export const addUserToGroup = async (email: string, tenantName: string) => {
   const command = new AdminAddUserToGroupCommand({
     Username: email,
+    GroupName: tenantName,
+    UserPoolId: env.AMPLIFY_AUTH_USERPOOL_ID,
+  });
+  return await client.send(command);
+};
+
+export const deleteCognitoGroup = async (tenantName: string) => {
+  const command = new DeleteGroupCommand({
     GroupName: tenantName,
     UserPoolId: env.AMPLIFY_AUTH_USERPOOL_ID,
   });

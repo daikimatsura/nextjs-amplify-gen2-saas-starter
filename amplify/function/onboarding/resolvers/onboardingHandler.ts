@@ -3,13 +3,21 @@ import {
   listUsers,
   createTenant,
   createUser,
+  deleteTenant,
+  deleteUser,
 } from "../../(common)/services/appsync";
 import {
   signUpCognitoUser,
   addCognitoGroup,
   addUserToGroup,
+  deleteCognitoUser,
+  deleteCognitoGroup,
 } from "../../(common)/services/cognito";
 export const onboardingHandler = async (args: any) => {
+  let tenantId: string | undefined;
+  let userId: string | undefined;
+  let cognitoGroupName: string | undefined;
+  let cognitoUserName: string | undefined;
   try {
     console.info(args);
     /*
@@ -34,7 +42,7 @@ export const onboardingHandler = async (args: any) => {
     });
     console.info(`tenant: ${tenant}`);
     if (tenant.length > 0) {
-      return createResponse(400, "Tenant already exists", tenantName);
+      throw new Error("Tenant already exists");
     }
 
     const user = await listUsers({
@@ -46,7 +54,7 @@ export const onboardingHandler = async (args: any) => {
     });
     console.info(`user: ${user}`);
     if (user.length > 0) {
-      return createResponse(400, "User already exists", email);
+      throw new Error("User already exists");
     }
 
     const tenantResult = await createTenant({
@@ -55,7 +63,7 @@ export const onboardingHandler = async (args: any) => {
       status: "PENDING",
     });
     console.info(`tenantResult: ${JSON.stringify(tenantResult)}`);
-
+    tenantId = tenantResult.data.id;
     const userResult = await createUser({
       name: `${tenantName}-root`,
       email,
@@ -64,10 +72,10 @@ export const onboardingHandler = async (args: any) => {
       role: "ROOT",
     });
     console.info(`userResult: ${JSON.stringify(userResult)}`);
-
+    userId = userResult.data.id;
     const addGroupResult = await addCognitoGroup(tenantName);
     console.info(`addGroupResult: ${JSON.stringify(addGroupResult)}`);
-
+    cognitoGroupName = addGroupResult.Group?.GroupName!;
     const signUpResult = await signUpCognitoUser(
       email,
       password,
@@ -75,7 +83,7 @@ export const onboardingHandler = async (args: any) => {
       "ROOT"
     );
     console.info(`signUpResult: ${JSON.stringify(signUpResult)}`);
-
+    cognitoUserName = email;
     const addUserToGroupResult = await addUserToGroup(email, tenantName);
     console.info(
       `addUserToGroupResult: ${JSON.stringify(addUserToGroupResult)}`
@@ -84,7 +92,22 @@ export const onboardingHandler = async (args: any) => {
     return createResponse(200, "アカウントの作成に成功しました", email);
   } catch (error) {
     console.error(error);
-    return createResponse(500, "アカウントの作成に失敗しました", "");
+    // ロールバック処理
+    if (!!tenantId) {
+      await deleteTenant({ id: tenantId });
+    }
+    if (!!userId) {
+      await deleteUser({ id: userId });
+    }
+    if (!!cognitoUserName) {
+      await deleteCognitoUser(cognitoUserName);
+    }
+    if (!!cognitoGroupName) {
+      await deleteCognitoGroup(cognitoGroupName);
+    }
+    const errorMessage =
+      error instanceof Error ? error.message : "アカウントの作成に失敗しました";
+    return createResponse(500, errorMessage, "");
   }
 };
 

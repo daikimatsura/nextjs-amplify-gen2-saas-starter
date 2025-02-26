@@ -78,6 +78,12 @@ export const getTenant = async (params: QueryParams<"Tenant", "get">) =>
 export const listTenants = async (params: QueryParams<"Tenant", "list">) =>
   await baseList<"Tenant", "list">("Tenant", "list", params);
 
+export const updateTenant = async (params: QueryParams<"Tenant", "update">) =>
+  await baseQuery<"Tenant", "update">("Tenant", "update", params);
+
+export const deleteTenant = async (params: QueryParams<"Tenant", "delete">) =>
+  await baseQuery<"Tenant", "delete">("Tenant", "delete", params);
+
 /*
 User操作
 */
@@ -89,3 +95,9 @@ export const getUser = async (params: QueryParams<"User", "get">) =>
 
 export const listUsers = async (params: QueryParams<"User", "list">) =>
   await baseList<"User", "list">("User", "list", params);
+
+export const updateUser = async (params: QueryParams<"User", "update">) =>
+  await baseQuery<"User", "update">("User", "update", params);
+
+export const deleteUser = async (params: QueryParams<"User", "delete">) =>
+  await baseQuery<"User", "delete">("User", "delete", params);
