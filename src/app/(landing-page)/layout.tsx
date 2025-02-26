@@ -10,11 +10,7 @@ const navLinks = [
   { label: "Contact", href: "/#contact" },
 ];
 
-export default function LandingPageLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const LandingPageLayout = ({ children }: { children: React.ReactNode }) => {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -83,4 +79,7 @@ export default function LandingPageLayout({
       </footer>
     </div>
   );
-}
+};
+
+LandingPageLayout.displayName = "LandingPageLayout";
+export default LandingPageLayout;

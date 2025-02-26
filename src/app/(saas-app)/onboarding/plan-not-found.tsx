@@ -24,4 +24,5 @@ const PlanNotFound: React.FC<PlanNotFoundProps> = ({ plan }) => {
   );
 };
 
+PlanNotFound.displayName = "PlanNotFound";
 export default PlanNotFound;

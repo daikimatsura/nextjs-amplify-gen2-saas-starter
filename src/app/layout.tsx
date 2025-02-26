@@ -10,18 +10,15 @@ export const metadata: Metadata = {
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="ja" className={inter.className}>
-      <body className="bg-cyan-800">
-        <ConfigureAmplifyClientSide />
-        <main className="min-h-screen">{children}</main>
-        <Toaster />
-      </body>
-    </html>
-  );
-}
+const RootLayout = ({ children }: { children: React.ReactNode }) => (
+  <html lang="ja" className={inter.className}>
+    <body className="bg-cyan-800">
+      <ConfigureAmplifyClientSide />
+      <main className="min-h-screen">{children}</main>
+      <Toaster />
+    </body>
+  </html>
+);
+
+RootLayout.displayName = "RootLayout";
+export default RootLayout;

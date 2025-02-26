@@ -1,9 +1,10 @@
 import Logout from "@/components/amplify/Logout";
 
-export default async function HomePage() {
-  return (
-    <div>
-      <Logout />
-    </div>
-  );
-}
+const HomePage = () => (
+  <div>
+    <Logout />
+  </div>
+);
+
+HomePage.displayName = "HomePage";
+export default HomePage;

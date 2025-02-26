@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { LoadingButton } from "@/components/ui/buttons/LoadingButton";
 
-export default function VerifyCodePage() {
+const VerifyCodePage = () => {
   const searchParams = useSearchParams();
   const username = searchParams.get("username");
   const [isLoading, setIsLoading] = useState(false);
@@ -84,4 +84,7 @@ export default function VerifyCodePage() {
       </div>
     </div>
   );
-}
+};
+
+VerifyCodePage.displayName = "VerifyCodePage";
+export default VerifyCodePage;

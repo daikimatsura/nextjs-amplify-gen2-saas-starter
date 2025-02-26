@@ -1,9 +1,10 @@
 import Login from "@/components/amplify/Login";
 
-export default function LoginPage() {
-  return (
-    <div className="min-h-screen bg-white">
-      <Login />
-    </div>
-  );
-}
+const SignInPage = () => (
+  <div className="min-h-screen bg-white">
+    <Login />
+  </div>
+);
+
+SignInPage.displayName = "SignInPage";
+export default SignInPage;

@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { LoadingButton } from "@/components/ui/buttons/LoadingButton";
 
-export default function Onboarding() {
+const Onboarding = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan");
@@ -126,4 +126,7 @@ export default function Onboarding() {
       </div>
     </div>
   );
-}
+};
+
+Onboarding.displayName = "Onboarding";
+export default Onboarding;

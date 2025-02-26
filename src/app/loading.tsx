@@ -1,5 +1,6 @@
 import Loading from "@/components/common/Loading";
 
-export default function LoadingPage() {
-  return <Loading />;
-}
+const LoadingPage = () => <Loading />;
+
+LoadingPage.displayName = "LoadingPage";
+export default LoadingPage;
