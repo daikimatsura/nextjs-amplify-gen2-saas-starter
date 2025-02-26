@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import ConfigureAmplifyClientSide from "@/components/amplify/ConfigureAmplifyClientSide";
 import "@/styles/globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import Loading from "./loading";
 export const metadata: Metadata = {
   title: "SaaS Demo",
   description: "SaaS Demo Landing Page",
@@ -22,7 +21,6 @@ export default function RootLayout({
         <ConfigureAmplifyClientSide />
         <main className="min-h-screen">{children}</main>
         <Toaster />
-        <Loading />
       </body>
     </html>
   );
